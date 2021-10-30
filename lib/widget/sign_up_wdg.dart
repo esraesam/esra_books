@@ -35,20 +35,19 @@ class _SignUpUiState extends State<SignUpUi> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.r),
+          borderRadius: BorderRadius.circular(30),
           color: Color(0xFFDAE6F0),
         ),
-        width: 300.w,
-        height: 500.h,
-        margin:
-            EdgeInsets.only(left: 20.r, right: 20.r, bottom: 20.r, top: 8.r),
+        width: 300,
+        height: 500,
+        margin: EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 8),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: new TextFormField(
                   decoration: new InputDecoration(
                     enabledBorder: UnderlineInputBorder(
@@ -66,9 +65,9 @@ class _SignUpUiState extends State<SignUpUi> {
                   },
                 ),
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: new TextFormField(
                   decoration: new InputDecoration(
                     enabledBorder: UnderlineInputBorder(
@@ -86,9 +85,9 @@ class _SignUpUiState extends State<SignUpUi> {
                   },
                 ),
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 10),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: new TextFormField(
                   obscureText: _isObscure,
                   decoration: new InputDecoration(
@@ -113,10 +112,10 @@ class _SignUpUiState extends State<SignUpUi> {
                   onSaved: (val) => _password = val!,
                 ),
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 40),
               Container(
-                height: 40.h,
-                width: 180.w,
+                height: 40,
+                width: 180,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xff74A9D1), //background color of button
@@ -124,7 +123,7 @@ class _SignUpUiState extends State<SignUpUi> {
                     // elevation: 3, //elevation of button
                     shape: RoundedRectangleBorder(
                         //to set border radius to button
-                        borderRadius: BorderRadius.circular(30.r)),
+                        borderRadius: BorderRadius.circular(30)),
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -146,7 +145,7 @@ class _SignUpUiState extends State<SignUpUi> {
                   },
                   child: Text(
                     'Sign Up',
-                    style: TextStyle(fontSize: 20.sp),
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
               ),

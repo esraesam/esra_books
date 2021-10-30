@@ -38,6 +38,9 @@ dependencies:
   email_validator: ^2.0.1
   provider: ^6.0.1
   shared_preferences: ^2.0.8
+  lite_rolling_switch: ^0.1.1
+  day_night_switcher: ^0.2.0+1
+  http: ^0.13.4
 
   
   

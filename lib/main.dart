@@ -1,14 +1,19 @@
+// import 'dart:convert';
+import 'package:esra_books/authentication/home_screen.dart';
 import 'package:esra_books/authentication/login_screen.dart';
 import 'package:esra_books/model/dark_themePro.dart';
+// import 'package:esra_books/model/myModel.dart';
 import 'package:esra_books/widget/style.dart';
 import 'package:flutter/material.dart';
 // import 'package:responsive_framework/responsive_framework.dart';
 // import 'package:sizer/sizer.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:google_fonts/google_fonts.dart';
 // import 'package:thememode_selector/thememode_selector.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+// import 'package:http/browser_client.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,9 +49,7 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-            home: LoginScreen(
-              selectedColor: Colors.white,
-            ),
+            home: HomeScreen(),
           );
         },
       ),

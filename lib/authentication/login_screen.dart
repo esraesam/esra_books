@@ -1,3 +1,4 @@
+import 'package:esra_books/model/welcome.dart';
 import 'package:esra_books/widget/loginWdg.dart';
 import 'package:esra_books/widget/sign_up_wdg.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,16 +33,16 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Container(
               // color: Colors.blue,
-              height: 17.h,
+              height: 17,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ToggleSwitch(
-                    minWidth: 120.w,
-                    minHeight: 40.h,
+                    minWidth: 120,
+                    minHeight: 40,
                     cornerRadius: 30.0,
-                    fontSize: 17.sp,
+                    fontSize: 17,
                     activeBgColors: [
                       [Color(0xff74A9D1)],
                       [Color(0xff74A9D1)]
@@ -60,28 +61,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     }),
               ],
             ),
-            SizedBox(height: 5.h),
+            SizedBox(height: 5),
             Expanded(
               child: ListView(
                 children: [
                   Image.asset(
                     'images/RectangleImg.png',
-                    height: 200.h,
-                    width: 200.w,
+                    height: 200,
+                    width: 200,
                     fit: BoxFit.contain,
                   ),
                   Center(
                     child: Text(
                       'Esra Books',
-                      style: TextStyle(
-                          fontSize: 25.sp, fontWeight: FontWeight.w500),
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                     ),
                   ),
                   Center(
                     child: Container(
                       //color: Colors.red,
-                      width: 330.w,
-                      height: 400.h,
+                      width: 330,
+                      height: 400,
                       child: screens[currentState],
                     ),
                   ),

@@ -1,8 +1,13 @@
 import 'package:esra_books/main.dart';
+import 'package:esra_books/model/dark_themePro.dart';
 import 'package:esra_books/screens/setting_screen.dart';
+import 'package:esra_books/widget/logout_dialog.dart';
 import 'package:esra_books/widget/profile_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:day_night_switcher/day_night_switcher.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -12,8 +17,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  TextEditingController _textFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     MediaQueryData? _mediaQueryData = MediaQuery.of(context);
     double? screenHeight = _mediaQueryData.size.height;
     double? screenWidth = _mediaQueryData.size.width;
@@ -30,6 +38,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
+
+                  LiteRollingSwitch(
+                    value: true,
+                    textOn: "Light",
+                    textOff: "Dark",
+                    colorOn: Colors.yellow[600],
+                    colorOff: Colors.black,
+                    iconOn: Icons.light_mode,
+                    iconOff: Icons.dark_mode,
+                    textSize: 19,
+                    onChanged: (bool value) {
+                      themeChange.darkTheme = value;
+                    },
+                  ),
+
+                  // Checkbox(
+                  //     value: themeChange.darkTheme,
+                  //     onChanged: (bool? value) {
+                  //       themeChange.darkTheme = value!;
+                  //     }),
                   // IconButton(
                   //     icon: Icon(MyAfpp.themeNotifier.value == ThemeMode.light
                   //         ? Icons.dark_mode
@@ -97,7 +125,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
               screenWidth: screenWidth,
               icon: Icons.power_settings_new,
               title: 'LogOut',
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        title: Text(
+                          'Are you sure logout?',
+                          style: TextStyle(
+                              fontFamily: 'RopaSans',
+                              color: Colors.black,
+                              fontSize: 22),
+                        ),
+                        content: LogoutDIalog(
+                            screenHeight: screenHeight,
+                            screenWidth: screenWidth,
+                            textFieldController: _textFieldController),
+                      );
+                    });
+              },
             ),
           ],
         ),

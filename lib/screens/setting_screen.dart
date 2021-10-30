@@ -152,7 +152,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   title: Text(
-                                    'Enter your new name',
+                                    'Select your language',
                                     style: TextStyle(
                                         fontFamily: 'RopaSans',
                                         color: Colors.black,
