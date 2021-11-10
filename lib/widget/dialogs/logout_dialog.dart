@@ -1,9 +1,12 @@
+import 'package:esra_books/authentication/login_screen.dart';
 import 'package:esra_books/common/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class name extends StatelessWidget {
-  name({
+class LogoutDIalog extends StatefulWidget {
+  const LogoutDIalog({
     Key? key,
     required this.screenHeight,
     required this.screenWidth,
@@ -16,29 +19,58 @@ class name extends StatelessWidget {
   final TextEditingController _textFieldController;
 
   @override
+  State<LogoutDIalog> createState() => _LogoutDIalogState();
+}
+
+class _LogoutDIalogState extends State<LogoutDIalog> {
+  String email = "";
+
+  Future getEmail() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      email = preferences.getString('email')!;
+    });
+    print(email);
+  }
+
+  Future logOut(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove('email');
+    Fluttertoast.showToast(
+        msg: "Logout Successful",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.amber,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginScreen(
+          selectedColor: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getEmail();
+  }
+
+  @override
   Widget build(BuildContext context) {
     MediaQueryData? _mediaQueryData = MediaQuery.of(context);
     double? screenHeight = _mediaQueryData.size.height;
     double? screenWidth = _mediaQueryData.size.width;
     return Container(
-      height: screenHeight * 0.25,
+      height: screenHeight * 0.07,
       width: screenWidth * 0.65,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          TextField(
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: kPrimaryColor),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: kPrimaryColor),
-              ),
-            ),
-            controller: _textFieldController,
-            textInputAction: TextInputAction.go,
-            keyboardType: TextInputType.name,
-          ),
-          SizedBox(height: screenHeight * 0.08),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -56,16 +88,17 @@ class name extends StatelessWidget {
               ),
               FlatButton(
                 child: new Text(
-                  'Submit',
+                  'Ok',
                   style: TextStyle(
                       fontFamily: 'RopaSans',
                       color: kPrimaryColor,
                       fontSize: 20),
                 ),
                 onPressed: () {
+                  logOut(context);
                   Navigator.of(context).pop();
                 },
-              )
+              ),
             ],
           )
         ],
