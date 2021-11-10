@@ -5,8 +5,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BookDetail extends StatefulWidget {
-  const BookDetail({Key? key}) : super(key: key);
+  BookDetail({
+    Key? key,
+    this.title,
+    this.author,
+    this.price,
+    this.image,
+    this.serialNo,
+    this.publisher,
+    this.rank,
+    this.description,
+  }) : super(key: key);
 
+  String? title;
+  String? author;
+  String? price;
+  String? image;
+  String? serialNo;
+  String? publisher;
+  int? rank;
+  String? description;
   @override
   _BookDetailState createState() => _BookDetailState();
 }
@@ -17,6 +35,7 @@ class _BookDetailState extends State<BookDetail> {
     MediaQueryData? _mediaQueryData = MediaQuery.of(context);
     double? screenHeight = _mediaQueryData.size.height;
     double? screenWidth = _mediaQueryData.size.width;
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -26,7 +45,9 @@ class _BookDetailState extends State<BookDetail> {
               width: screenWidth,
               decoration: new BoxDecoration(
                 image: new DecorationImage(
-                  image: new ExactAssetImage('images/story.png'),
+                  image: new NetworkImage(
+                    '${widget.image}',
+                  ),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -70,28 +91,33 @@ class _BookDetailState extends State<BookDetail> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Image.asset(
-                    'images/story.png',
-                    fit: BoxFit.fill,
+                  child: Image(
+                    width: 200,
+                    height: 200,
+                    image: NetworkImage(
+                      '${widget.image}',
+                    ),
                   ),
+                  // '${widget.image}',
+                  // fit: BoxFit.fill,
                 ),
                 SizedBox(height: screenHeight * 0.015),
                 Text(
-                  'Let The Story Do The Work',
+                  '${widget.title}',
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'by Esther Choy',
+                  '${widget.author}',
                   style: TextStyle(
                       fontSize: 17,
                       color: Colors.white,
                       fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  '20\$',
+                  '${widget.price}' + '\$',
                   style: TextStyle(
                       fontSize: 17,
                       color: Colors.white,
@@ -114,84 +140,92 @@ class _BookDetailState extends State<BookDetail> {
                       Center(
                         child: Container(
                           height: screenHeight * 0.1,
-                          width: screenWidth * 0.85,
+                          width: screenWidth * 0.92,
                           decoration: BoxDecoration(
                             color: kPrimaryColorLight,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           padding: const EdgeInsets.only(top: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
                             children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    '09111',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600),
+                              Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Center(
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                            '${widget.serialNo}',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          Text(
+                                            'Serial No.',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black12,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ],
+                                      ),
+                                      VerticalDivider(
+                                        width: 50,
+                                        thickness: 2,
+                                        color: Colors.black38,
+                                        indent: 5,
+                                        endIndent: 20,
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            '${widget.publisher}',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          Text(
+                                            'Publisher',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black12,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ],
+                                      ),
+                                      VerticalDivider(
+                                        width: 50,
+                                        thickness: 2,
+                                        color: Colors.black38,
+                                        indent: 5,
+                                        endIndent: 20,
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            '${widget.rank}',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          Text(
+                                            'Rank',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black12,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'Serial No.',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black12,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
-                              ),
-                              VerticalDivider(
-                                width: 50,
-                                thickness: 2,
-                                color: Colors.black38,
-                                indent: 5,
-                                endIndent: 20,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Eng',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  Text(
-                                    'Language',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black12,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
-                              ),
-                              VerticalDivider(
-                                width: 50,
-                                thickness: 2,
-                                color: Colors.black38,
-                                indent: 5,
-                                endIndent: 20,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    '300',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  Text(
-                                    'Number of\npages',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black12,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
@@ -219,7 +253,7 @@ class _BookDetailState extends State<BookDetail> {
                       Padding(
                         padding: const EdgeInsets.only(left: 33),
                         child: Text(
-                          'People forget facts, but they never forget a good story. Unfortunately it’s never that simple, though. Because for most, there’s nothing easy about crafting a memorable story, let alone linking it to professional goals.',
+                          '${widget.description}',
                           textAlign: TextAlign.start,
                           style: TextStyle(
                               fontSize: 16,

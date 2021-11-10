@@ -123,6 +123,7 @@ class Book {
     required this.bookUri,
     required this.publisher,
     required this.title,
+    required this.rank,
   });
 
   String author;
@@ -135,8 +136,8 @@ class Book {
 
   String bookUri;
   String publisher;
-
   String title;
+  int rank;
 
   factory Book.fromJson(Map<String, dynamic> json) => Book(
         author: json["author"],
@@ -148,6 +149,7 @@ class Book {
         bookUri: json["book_uri"],
         publisher: json["publisher"],
         title: json["title"],
+        rank: json["rank"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -158,6 +160,7 @@ class Book {
         "book_uri": bookUri,
         "publisher": publisher,
         "title": title,
+        "rank": rank,
       };
 }
 

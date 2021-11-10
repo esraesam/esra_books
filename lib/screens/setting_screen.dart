@@ -1,15 +1,21 @@
-import 'package:esra_books/widget/Country_dialog.dart';
-import 'package:esra_books/widget/email_dialog.dart';
-import 'package:esra_books/widget/language_dialog.dart';
-import 'package:esra_books/widget/password_dialog.dart';
-import 'package:esra_books/widget/phone_dialog.dart';
-import 'package:esra_books/widget/settings_item.dart';
-import 'package:esra_books/widget/username_dialog.dart';
+import 'dart:convert';
+
+import 'package:esra_books/widget/dialogs/Country_dialog.dart';
+import 'package:esra_books/widget/dialogs/email_dialog.dart';
+import 'package:esra_books/widget/dialogs/language_dialog.dart';
+import 'package:esra_books/widget/dialogs/password_dialog.dart';
+import 'package:esra_books/widget/dialogs/phone_dialog.dart';
+import 'package:esra_books/widget/settings/settings_item.dart';
+import 'package:esra_books/widget/dialogs/username_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
 class SettingScreen extends StatefulWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+  final List list;
+  final int index;
+  const SettingScreen({required this.list, required this.index});
 
   @override
   _SettingScreenState createState() => _SettingScreenState();
@@ -17,6 +23,8 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   TextEditingController _textFieldController = TextEditingController();
+  TextEditingController user = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData? _mediaQueryData = MediaQuery.of(context);
@@ -45,12 +53,13 @@ class _SettingScreenState extends State<SettingScreen> {
                         screenWidth: screenWidth,
                         icon: Icons.person,
                         title: 'Username',
-                        txt: "Esra Esam",
+                        txt: "${user.text}",
                         onTap: () {
                           showDialog(
                               context: context,
                               barrierDismissible: false,
                               builder: (BuildContext context) {
+                                var i;
                                 return AlertDialog(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
@@ -63,10 +72,11 @@ class _SettingScreenState extends State<SettingScreen> {
                                         fontSize: 22),
                                   ),
                                   content: name(
-                                      screenHeight: screenHeight,
-                                      screenWidth: screenWidth,
-                                      textFieldController:
-                                          _textFieldController),
+                                    screenHeight: screenHeight,
+                                    screenWidth: screenWidth,
+                                    list: [],
+                                    index: i,
+                                  ),
                                 );
                               });
                         },
@@ -109,7 +119,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         screenWidth: screenWidth,
                         icon: Icons.vpn_key,
                         title: 'Password',
-                        txt: 'password',
+                        txt: "password",
                         onTap: () {
                           showDialog(
                             context: context,

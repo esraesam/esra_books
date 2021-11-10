@@ -46,7 +46,6 @@ class ProfileItem extends StatelessWidget {
                 color: Colors.grey.shade400,
               ),
             ),
-
             Spacer(),
             // Text(
             //   'esra',

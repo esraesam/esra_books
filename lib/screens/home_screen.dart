@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:esra_books/common/constants.dart';
 import 'package:esra_books/model/welcome.dart';
 import 'package:esra_books/screens/book_detail.dart';
-import 'package:esra_books/screens/book_detail1.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,8 +14,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController user = TextEditingController();
+
+  var image = '';
+
+  Future getData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      image = preferences.getString('img')!;
+    });
+
+    print(image);
+  }
+
   var loading = false;
 
+  //this is a function that fetches the json and returns a list
   Future<Welcome> _fetchData() async {
     setState(() {
       loading = true;
@@ -25,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         "https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=zhQn8sp06p1agtXa1jvEgdnAihXUEDMu"));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      print(data);
+      //print(data);
       list = Welcome.fromJson(data);
 
       loading = false;
@@ -45,9 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _textController = new TextEditingController();
 
   void _clearTextField() {
-    // Clear everything in the text field
     _textController.clear();
-    // Call setState to update the UI
     setState(() {});
   }
 
@@ -60,14 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Container(
         child: FutureBuilder<Welcome>(
-            //Now let's create our custom List tile
             future: _listModel,
-            builder: (context, snapshot) {
-              var list = snapshot.data!.results.lists;
-              for (var i in list) {
-                print('This is deBug: ${i.listName}');
-              }
-              //final x = _listModel[i];
+            builder: (context, AsyncSnapshot<Welcome> snapshot) {
               return SafeArea(
                 child: Column(
                   children: [
@@ -82,16 +88,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   builder: (_) => BookDetail()));
                             },
                             child: Text(
-                              "${snapshot.data!.results.publishedDate}",
+                              "Esra Books",
                               style: GoogleFonts.notoSerif(
                                 textStyle: TextStyle(fontSize: 24),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Image.asset('images/esra.png'),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(8),
+                          //   child: Image.asset('image'),
+                          //),
                         ],
                       ),
                     ),
@@ -189,121 +195,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                               child: TabBarView(
                                 children: [
-                                  ListView(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        BookDetail()),
-                                              );
-                                            },
-                                            // child: Image(
-                                            //   image: NetworkImage(
-                                            //       i.data!.bookImage),
-                                            // ),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        BookDetail1()),
-                                              );
-                                            },
-                                            // child: Image(
-                                            //   image: NetworkImage(
-                                            //       i.data!.bookImage),
-                                            // ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: screenHeight * 0.02),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset('images/story.png'),
-                                          Image.asset('images/thinking.png'),
-                                        ],
-                                      ),
-                                      SizedBox(height: screenHeight * 0.02),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset('images/story.png'),
-                                          Image.asset('images/thinking.png'),
-                                        ],
-                                      ),
-                                    ],
+                                  AllBooks(
+                                    screenHeight: screenHeight,
+                                    snapshot: snapshot,
                                   ),
-                                  ListView(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset('images/story.png'),
-                                          Image.asset('images/thinking.png'),
-                                        ],
-                                      ),
-                                      SizedBox(height: screenHeight * 0.02),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset('images/story.png'),
-                                          Image.asset('images/thinking.png'),
-                                        ],
-                                      ),
-                                      SizedBox(height: screenHeight * 0.02),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset('images/story.png'),
-                                          Image.asset('images/thinking.png'),
-                                        ],
-                                      ),
-                                    ],
+                                  NewestTab(
+                                    screenHeight: screenHeight,
+                                    snapshot: snapshot,
                                   ),
-                                  ListView(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset('images/story.png'),
-                                          Image.asset('images/thinking.png'),
-                                        ],
-                                      ),
-                                      SizedBox(height: screenHeight * 0.02),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset('images/story.png'),
-                                          Image.asset('images/thinking.png'),
-                                        ],
-                                      ),
-                                      SizedBox(height: screenHeight * 0.02),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Image.asset('images/story.png'),
-                                          Image.asset('images/thinking.png'),
-                                        ],
-                                      ),
-                                    ],
+                                  RecommendedTab(
+                                    screenHeight: screenHeight,
+                                    snapshot: snapshot,
                                   ),
                                 ],
                               ),
@@ -311,12 +213,163 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               );
             }),
       ),
+    );
+  }
+}
+
+class AllBooks extends StatelessWidget {
+  const AllBooks({
+    Key? key,
+    required this.screenHeight,
+    required this.snapshot,
+  }) : super(key: key);
+
+  final double? screenHeight;
+  final snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    return snapshot.data == null
+        ? Center(child: CircularProgressIndicator())
+        : ListView.builder(
+            itemCount: snapshot.data!.results.lists.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GridView.builder(
+                shrinkWrap: true,
+                primary: false,
+                itemCount: snapshot.data!.results.lists[index].books.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5.0,
+                  mainAxisSpacing: 16.0,
+                ),
+                itemBuilder: (context, index2) {
+                  String title = snapshot
+                      .data!.results.lists[index].books[index2].title
+                      .toString();
+                  String author = snapshot
+                      .data!.results.lists[index].books[index2].author
+                      .toString();
+                  String price = snapshot
+                      .data!.results.lists[index].books[index2].price
+                      .toString();
+                  String image = snapshot
+                      .data!.results.lists[index].books[index2].bookImage
+                      .toString();
+                  String serialNo = snapshot
+                      .data!.results.lists[index].books[index2].primaryIsbn10
+                      .toString();
+                  String publisher = snapshot
+                      .data!.results.lists[index].books[index2].publisher
+                      .toString();
+                  int rank =
+                      snapshot.data!.results.lists[index].books[index2].rank;
+                  String description = snapshot
+                      .data!.results.lists[index].books[index2].description;
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BookDetail(
+                            title: title,
+                            author: author,
+                            price: price,
+                            image: image,
+                            serialNo: serialNo,
+                            publisher: publisher,
+                            rank: rank,
+                            description: description,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      // color: Colors.amber,
+                      child: Image(
+                        width: 200,
+                        height: 200,
+                        image: NetworkImage(image),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          );
+  }
+}
+
+class RecommendedTab extends StatelessWidget {
+  const RecommendedTab({
+    Key? key,
+    required this.screenHeight,
+    required this.snapshot,
+  }) : super(key: key);
+
+  final double? screenHeight;
+  final snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      itemCount: snapshot.data!.results.lists[0].books.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 5.0,
+        mainAxisSpacing: 16.0,
+      ),
+      itemBuilder: (context, index) {
+        return Container(
+          child: Image(
+            width: 200,
+            height: 200,
+            image: NetworkImage(
+              "${snapshot.data!.results.lists[0].books[index].bookImage}",
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class NewestTab extends StatelessWidget {
+  const NewestTab({
+    Key? key,
+    required this.screenHeight,
+    required this.snapshot,
+  }) : super(key: key);
+
+  final double? screenHeight;
+  final snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      itemCount: snapshot.data!.results.lists[0].books.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 5.0,
+        mainAxisSpacing: 16.0,
+      ),
+      itemBuilder: (context, index) {
+        return Container(
+          child: Image(
+            width: 200,
+            height: 200,
+            image: NetworkImage(
+              "${snapshot.data!.results.lists[0].books[index].bookImage}",
+            ),
+          ),
+        );
+      },
     );
   }
 }

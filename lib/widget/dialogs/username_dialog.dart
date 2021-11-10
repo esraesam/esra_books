@@ -54,12 +54,6 @@ class _nameState extends State<name> {
     }
   }
 
-  Future getData() async {
-    var url = "http://192.168.1.10/bookDb/bookphp/read.php";
-    var response = await http.get(Uri.parse(url));
-    return json.decode(response.body);
-  }
-
   // Future update() async {
   //   var url = "http://192.168.1.22/bookDb/bookphp/update.php";
   //   var response = await http.post(Uri.parse(url), body: {

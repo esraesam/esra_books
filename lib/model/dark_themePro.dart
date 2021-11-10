@@ -1,4 +1,4 @@
-import 'package:esra_books/widget/dark_theme_preference.dart';
+import 'package:esra_books/theme/dark_theme_preference.dart';
 import 'package:flutter/cupertino.dart';
 
 class DarkThemeProvider with ChangeNotifier {

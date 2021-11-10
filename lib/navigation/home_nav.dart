@@ -1,9 +1,9 @@
-import 'package:esra_books/authentication/home_screen.dart';
+import 'package:esra_books/screens/home_screen.dart';
 import 'package:esra_books/common/constants.dart';
+import 'package:esra_books/screens/library_screen.dart';
 
 import 'package:esra_books/screens/search_screen.dart';
 import 'package:esra_books/screens/profile_screen.dart';
-import 'package:esra_books/screens/book_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -42,7 +42,7 @@ class HomeNav extends StatelessWidget {
     return [
       HomeScreen(),
       SearchScreen(),
-      BookScreen(),
+      LibraryScreen(),
       ProfileScreen(),
     ];
   }

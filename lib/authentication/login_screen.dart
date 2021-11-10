@@ -1,8 +1,11 @@
+import 'package:esra_books/screens/home_screen.dart';
 import 'package:esra_books/model/welcome.dart';
-import 'package:esra_books/widget/loginWdg.dart';
-import 'package:esra_books/widget/sign_up_wdg.dart';
+import 'package:esra_books/widget/authentication/loginWdg.dart';
+import 'package:esra_books/widget/authentication/sign_up_wdg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,6 +24,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   List<Widget> screens = [LoginUi(), SignUpUi()];
   int currentState = 0;
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData? _mediaQueryData = MediaQuery.of(context);
