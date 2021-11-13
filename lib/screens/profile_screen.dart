@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:esra_books/common/constants.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:esra_books/model/dark_themePro.dart';
 import 'package:esra_books/screens/setting_screen.dart';
@@ -9,9 +7,8 @@ import 'package:esra_books/widget/dialogs/logout_dialog.dart';
 import 'package:esra_books/widget/profile/profile_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
-import 'package:day_night_switcher/day_night_switcher.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -48,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final themeChange = Provider.of<DarkThemeProvider>(context);
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     MediaQueryData? _mediaQueryData = MediaQuery.of(context);
     double? screenHeight = _mediaQueryData.size.height;
     double? screenWidth = _mediaQueryData.size.width;
@@ -65,7 +62,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-
                   LiteRollingSwitch(
                     value: true,
                     textOn: "Light",
@@ -76,25 +72,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     iconOff: Icons.dark_mode,
                     textSize: 19,
                     onChanged: (bool value) {
-                      //themeChange.darkTheme = value;
+                      themeChange.darkTheme = value;
                     },
                   ),
-
-                  // Checkbox(
-                  //     value: themeChange.darkTheme,
-                  //     onChanged: (bool? value) {
-                  //       themeChange.darkTheme = value!;
-                  //     }),
-                  // IconButton(
-                  //     icon: Icon(MyAfpp.themeNotifier.value == ThemeMode.light
-                  //         ? Icons.dark_mode
-                  //         : Icons.light_mode),
-                  //     onPressed: () {
-                  //       MyApp.themeNotifier.value =
-                  //           MyApp.themeNotifier.value == ThemeMode.light
-                  //               ? ThemeMode.dark
-                  //               : ThemeMode.light;
-                  //     })
                 ],
               ),
             ),
@@ -103,17 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(
               height: 20,
             ),
-            // Container(
-            //   height: screenHeight * 0.2,
-            //   width: screenWidth * 0.5,
-            //   decoration: BoxDecoration(
-            //       shape: BoxShape.circle,
-            //       image: DecorationImage(
-            //         image: ExactAssetImage('images/Esra.jpg'),
-            //       )),
-            // ),
             SizedBox(height: screenHeight * 0.01),
-
             Text(
               name,
               style: TextStyle(

@@ -15,9 +15,6 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData? _mediaQueryData = MediaQuery.of(context);
-    double? screenHeight = _mediaQueryData.size.height;
-    double? screenWidth = _mediaQueryData.size.width;
     return Container(
       decoration: BoxDecoration(
         color: kPrimaryColorLight,
@@ -27,7 +24,7 @@ class CategoryItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            width: screenWidth * 0.01,
+            width: screenWidth! * 0.01,
           ),
           Expanded(
             child: Center(
@@ -38,7 +35,7 @@ class CategoryItem extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: screenWidth * 0.01,
+            width: screenWidth! * 0.01,
           ),
         ],
       ),

@@ -54,23 +54,20 @@ class _SignUpUiState extends State<SignUpUi> {
   final _formKey = GlobalKey<FormState>();
   List<Widget> screens = [LoginUi(), SignUpUi()];
   int currentState = 0;
-  bool _obscureText = true;
+  // bool _obscureText = true;
 
   String? _password;
 
-  // Toggles the password show status
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
+  // // Toggles the password show status
+  // void _toggle() {
+  //   setState(() {
+  //     _obscureText = !_obscureText;
+  //   });
+  // }
 
   bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
-    MediaQueryData? _mediaQueryData = MediaQuery.of(context);
-    double? screenHeight = _mediaQueryData.size.height;
-    double? screenWidth = _mediaQueryData.size.width;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

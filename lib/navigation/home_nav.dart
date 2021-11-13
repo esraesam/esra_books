@@ -18,8 +18,8 @@ class HomeNav extends StatelessWidget {
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.search),
-        title: ("Search"),
+        icon: Icon(Icons.category),
+        title: ("Category"),
         activeColorPrimary: kPrimaryColor,
         inactiveColorPrimary: Colors.grey,
       ),

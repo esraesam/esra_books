@@ -1,10 +1,8 @@
 import 'dart:convert';
 
-import 'package:esra_books/common/constants.dart';
 import 'package:esra_books/model/welcome.dart';
 import 'package:esra_books/screens/category_detail.dart';
 import 'package:esra_books/widget/category/category_item.dart';
-import 'package:esra_books/widget/category/category_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

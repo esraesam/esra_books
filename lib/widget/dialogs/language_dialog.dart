@@ -15,7 +15,7 @@ class LanguageDialog extends StatefulWidget {
 }
 
 class _LanguageDialogState extends State<LanguageDialog> {
-  bool _value = false;
+  //bool _value = false;
   int val = -1;
   @override
   Widget build(BuildContext context) {

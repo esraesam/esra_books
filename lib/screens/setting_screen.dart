@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:esra_books/widget/dialogs/Country_dialog.dart';
 import 'package:esra_books/widget/dialogs/email_dialog.dart';
 import 'package:esra_books/widget/dialogs/language_dialog.dart';
@@ -9,8 +7,6 @@ import 'package:esra_books/widget/settings/settings_item.dart';
 import 'package:esra_books/widget/dialogs/username_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
 
 class SettingScreen extends StatefulWidget {
   final List list;

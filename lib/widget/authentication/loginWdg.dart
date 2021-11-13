@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'package:esra_books/screens/home_screen.dart';
 import 'package:esra_books/authentication/login_screen.dart';
-import 'package:esra_books/model/welcome.dart';
 import 'package:esra_books/navigation/home_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +24,7 @@ class _LoginUiState extends State<LoginUi> {
   TextEditingController pass = TextEditingController();
 
   Future login() async {
-    var url = "http://192.168.1.10/bookDb/bookphp/login.php";
+    var url = "http://192.168.1.9/bookDb/bookphp/login.php";
     var response = await http.post(Uri.parse(url), body: {
       "username": user.text,
       "password": pass.text,
@@ -94,9 +91,6 @@ class _LoginUiState extends State<LoginUi> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    MediaQueryData? _mediaQueryData = MediaQuery.of(context);
-    double? screenHeight = _mediaQueryData.size.height;
-    double? screenWidth = _mediaQueryData.size.width;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

@@ -1,13 +1,8 @@
-import 'package:esra_books/screens/home_screen.dart';
-import 'package:esra_books/model/welcome.dart';
 import 'package:esra_books/widget/authentication/loginWdg.dart';
 import 'package:esra_books/widget/authentication/sign_up_wdg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -27,10 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData? _mediaQueryData = MediaQuery.of(context);
-    double? screenHeight = _mediaQueryData.size.height;
-    double? screenWidth = _mediaQueryData.size.width;
-
     return Scaffold(
       body: SafeArea(
         child: Column(
